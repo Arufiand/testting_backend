@@ -96,5 +96,17 @@ class AuthController extends Controller
                         ]
                     );
             }
+	    }
+
+    public function logout(Request $request)
+	{
+		$user = $request->user();
+		$user->currentAccessToken()->delete();
+		// dd($user); /// Laravel Data Dump
+
+		return response()->json([
+			'Message' => "Logout Success",
+			'Status' => True
+		], Response::HTTP_OK);
 	}
 }
